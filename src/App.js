@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Logon from './component/logon'
 
 class App extends Component {
   state = {
-    response: ''
+    response: '',
+    isLoggedIn: false
   };
 
   componentDidMount(){
@@ -20,8 +20,16 @@ class App extends Component {
     if (response.status !== 200) throw Error(body.message);
     return body;
   };
+
+  handleLogonSubmit(){
+    this.setState({ isLoggedIn: true });
+  }
   
   render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let loginForm = null;
+    if(!isLoggedIn){ loginForm = <Logon onSubmit={this.handleLogonSubmit}/> }
+
     return (
       <div className="App">
         <header className="App-header">
@@ -30,7 +38,7 @@ class App extends Component {
         <p className="App-intro">
           { this.state.response }
         </p>
-        <Logon />
+         {loginForm}
       </div>
     );
   }
