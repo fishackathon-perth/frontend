@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Logon from './component/logon'
+import DisplayMap from './component/displayMap'
 
 class App extends Component {
   state = {
@@ -22,13 +23,18 @@ class App extends Component {
   };
 
   handleLogonSubmit(){
+    // this should be submitting user details
+    // for now fake user has logged in
     this.setState({ isLoggedIn: true });
   }
   
   render() {
     const isLoggedIn = this.state.isLoggedIn;
     let loginForm = null;
-    if(!isLoggedIn){ loginForm = <Logon onSubmit={this.handleLogonSubmit}/> }
+    if(!isLoggedIn){ loginForm = <Logon onSubmit={this.handleLogonSubmit.bind(this)}/> }
+    
+    let map = null;
+    if(isLoggedIn){ map = <DisplayMap />}
 
     return (
       <div className="App">
@@ -38,7 +44,7 @@ class App extends Component {
         <p className="App-intro">
           { this.state.response }
         </p>
-         {loginForm}
+         {loginForm}{map}
       </div>
     );
   }
