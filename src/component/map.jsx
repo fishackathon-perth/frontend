@@ -1,26 +1,32 @@
-import React from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
+import Polygon from 'react-polygon'
 
-const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-  <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
-  >
-    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
-  </GoogleMap>
-))
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
+export default class Map extends Component {
+  static defaultProps = {
+    center: {lat: 59.95, lng: 30.33},
+    zoom: 11
+  };
 
-export default class Map extends React.Component {
-	render() {
-		return (
-			<MyMapComponent
-			  isMarkerShown
-			  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-			  loadingElement={<div style={{ height: `100%` }} />}
-			  containerElement={<div style={{ height: `400px` }} />}
-			  mapElement={<div style={{ height: `100%` }} />}
-			/>
-		);
-	}
+  render() {
+    return (
+      <GoogleMapReact
+      	key="AIzaSyCVXZ05W6brklnhdVKcSCXte-og2uTZOyM"
+        defaultCenter={this.props.center}
+        defaultZoom={this.props.zoom}
+      >
+        <Polygon
+        	n={7}
+        	size={200}
+          lat={59.95413}
+          lng={30.1}
+          fill="rgba(219, 0, 0, 0.54)"
+          text={'Kreyser Avrora'}
+        />
+
+      </GoogleMapReact>
+    );
+  }
 }

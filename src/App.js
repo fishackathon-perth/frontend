@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Logon from './component/logon'
 import DisplayMap from './component/displayMap'
+import Map from './component/map'
 
 class App extends Component {
   state = {
@@ -44,7 +45,9 @@ class App extends Component {
         <p className="App-intro">
           { this.state.response }
         </p>
-         {loginForm}{map}
+        <div className="mapContainer">
+         <Map/>
+         </div>
       </div>
     );
   }
